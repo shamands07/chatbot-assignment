@@ -1,0 +1,10 @@
+{
+  "name": "sendMessage",
+  "definition": {
+    "kind": "synchronous",
+    "handler": "https://<your-n8n-webhook-endpoint>/webhook/hasura-send-message",
+    "type": "mutation"
+  },
+  "output_type": "sendMessage_response",
+  "comment": "Hasura Action that triggers n8n to call OpenRouter and insert bot response."
+}

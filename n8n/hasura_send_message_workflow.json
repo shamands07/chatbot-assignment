@@ -1,0 +1,68 @@
+{
+  "name": "Hasura - sendMessage -> OpenRouter -> Insert Bot Response",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "webhook/hasura-send-message",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "graphql",
+        "graphql": {
+          "resource": "={{$json[\"body\"][\"input\"][\"chat_id\"]}}",
+          "query": "query GetChatOwner($chat_id: uuid!) { chats_by_pk(id: $chat_id) { id user_id } }",
+          "variables": "{\"chat_id\":\"={{$json[\"body\"][\"input\"][\"chat_id\"]}}\"}"
+        }
+      },
+      "name": "Hasura - Get Chat",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        500,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "httpRequest",
+        "url": "https://api.openrouter.ai/v1/chat/completions",
+        "method": "POST",
+        "options": {},
+        "bodyParametersJson": "={\"model\": \"gpt-4o-mini\", \"messages\": [{\"role\":\"user\",\"content\": {{$json[\"body\"][\"input\"][\"message\"]}} }]}"
+      },
+      "name": "OpenRouter - Call",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        750,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "graphql",
+        "graphql": {
+          "query": "mutation InsertBotMessage($chat_id: uuid!, $content: String!) { insert_messages_one(object: {chat_id: $chat_id, user_id: null, role: \"bot\", content: $content}) { id content created_at } }",
+          "variables": "{\"chat_id\":\"={{$json[\"body\"][\"input\"][\"chat_id\"]}}\",\"content\":\"={{$json[\"body\"][\"openrouter_response\"]}}\"}"
+        }
+      },
+      "name": "Hasura - Insert Bot Message",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        300
+      ]
+    }
+  ],
+  "connections": {}
+}

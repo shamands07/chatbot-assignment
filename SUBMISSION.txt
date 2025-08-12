@@ -1,0 +1,11 @@
+Name: Joey Dash
+Contact: 8281810740
+Deployed: https://<your-netlify-deploy>.netlify.app/
+
+Repo: https://github.com/<your-username>/chatbot-assignment-repo
+
+Notes:
+- Email sign-up/sign-in via Nhost Auth (email + password).
+- Chat system uses Hasura GraphQL queries/mutations/subscriptions only.
+- Hasura Action `sendMessage` triggers n8n workflow which calls OpenRouter and writes bot replies back to Hasura.
+- RLS policies ensure users access only their own chats/messages.
