@@ -1,0 +1,106 @@
+/* Full-screen gradient background */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #16bde7, #6a11cb);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+/* Glassmorphic login box */
+.login-box {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  text-align: center;
+  width: 350px;
+  transition: transform 0.3s;
+}
+
+.login-box:hover {
+  transform: translateY(-5px);
+}
+
+/* Logo */
+.logo {
+  width: 100px;
+  margin-bottom: 20px;
+  transition: transform 0.3s;
+}
+
+.logo:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Headings */
+.login-box h2 {
+  color: #fff;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+/* Input fields */
+.login-box input {
+  display: block;
+  width: 100%;
+  margin: 15px 0;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.login-box input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+.login-box input:focus {
+  background: rgba(255,255,255,0.4);
+  transform: scale(1.02);
+}
+
+/* Buttons */
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.login-box button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Login button */
+.login-box button:first-of-type {
+  background: #16bde7;
+  color: #fff;
+}
+
+/* GitHub button */
+.github-btn {
+  background: #333;
+  color: #fff;
+  margin-top: 10px;
+}
